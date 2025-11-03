@@ -1,7 +1,7 @@
 # Encrypted Temperature Check
 
 An encrypted temperature check system using Fully Homomorphic Encryption (FHE) enabled Solidity smart contracts with the
-FHEVM protocol by Zama. Users can submit their temperature readings encrypted, and the system checks for fever (≥37.5°C)
+FHEVM protocol by Zama. Users can submit their temperature readings encrypted, and the system checks for fever (�?7.5°C)
 without ever seeing the actual temperature value.
 
 ## Features
@@ -78,14 +78,14 @@ For detailed instructions see:
 ```
 pro8/
 ├── contracts/                          # Smart contract source files
-│   └── EncryptedTemperatureCheck.sol  # Encrypted temperature check contract
+�?  └── EncryptedTemperatureCheck.sol  # Encrypted temperature check contract
 ├── deploy/                             # Deployment scripts
 ├── tasks/                              # Hardhat custom tasks
 ├── test/                               # Test files
 ├── frontend/                           # Next.js frontend application
-│   ├── components/                     # React components
-│   ├── hooks/                          # Custom React hooks
-│   └── app/                            # Next.js app directory
+�?  ├── components/                     # React components
+�?  ├── hooks/                          # Custom React hooks
+�?  └── app/                            # Next.js app directory
 ├── hardhat.config.ts                   # Hardhat configuration
 └── package.json                        # Dependencies and scripts
 ```
@@ -120,3 +120,5 @@ This project is licensed under the BSD-3-Clause-Clear License. See the [LICENSE]
 ---
 
 **Built with ❤️ by the Zama team**
+
+// Add comprehensive installation and usage guide
