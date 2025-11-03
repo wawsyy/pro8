@@ -61,3 +61,5 @@ contract EncryptedTemperatureCheck is SepoliaConfig {
     }
 }
 
+
+// Add input validation and error handling
