@@ -91,3 +91,5 @@ const config: HardhatUserConfig = {
 };
 
 export default config;
+
+// Improve compilation settings and gas optimization
