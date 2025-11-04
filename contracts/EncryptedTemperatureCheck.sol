@@ -65,3 +65,5 @@ contract EncryptedTemperatureCheck is SepoliaConfig {
 // Add input validation and error handling
 
 // Add owner-only functions and access modifiers
+
+// Reduce computational complexity and gas costs
