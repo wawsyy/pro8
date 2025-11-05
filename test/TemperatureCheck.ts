@@ -177,3 +177,5 @@ describe("EncryptedTemperatureCheck", function () {
 
 
 // Implement unit tests for encrypted operations
+
+// Add tests for boundary conditions and error scenarios
