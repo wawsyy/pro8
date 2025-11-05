@@ -67,3 +67,5 @@ contract EncryptedTemperatureCheck is SepoliaConfig {
 // Add owner-only functions and access modifiers
 
 // Reduce computational complexity and gas costs
+
+// Implement encrypted temperature history storage
