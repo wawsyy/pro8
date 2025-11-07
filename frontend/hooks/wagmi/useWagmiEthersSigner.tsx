@@ -99,8 +99,6 @@ function useWagmiEthersSignerInternal(parameters: {
           // Delegate other requests to walletClient
           return walletClient.request(args as any);
         },
-        on: () => {},
-        removeListener: () => {},
       };
 
       setProvider(eip1193Provider);
