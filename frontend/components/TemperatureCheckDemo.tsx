@@ -81,7 +81,7 @@ export const TemperatureCheckDemo = () => {
             Submit your temperature securely using Fully Homomorphic Encryption (FHE)
           </p>
           <p className="text-md text-gray-600 mt-2">
-            The system checks for fever (�?7.5°C) without ever seeing your actual temperature
+            The system checks for fever (�≥37.5°C) without ever seeing your actual temperature
           </p>
         </div>
         <div className="flex justify-center">
@@ -170,7 +170,7 @@ export const TemperatureCheckDemo = () => {
         {printProperty(
           "Fever Result",
           temperatureCheck.clearFeverResult !== undefined
-            ? (hasFever ? "FEVER (�?7.5°C)" : "NORMAL (<37.5°C)")
+            ? (hasFever ? "FEVER (�≥37.5°C)" : "NORMAL (<37.5°C)")
             : "Not decrypted"
         )}
       </div>
@@ -204,7 +204,7 @@ export const TemperatureCheckDemo = () => {
           </button>
         </div>
         <p className="text-sm text-gray-600 mt-2">
-          Enter your temperature in Celsius. The system will check if it indicates fever (�?7.5°C) without seeing the actual value.
+          Enter your temperature in Celsius. The system will check if it indicates fever (�≥37.5°C) without seeing the actual value.
         </p>
       </div>
 
