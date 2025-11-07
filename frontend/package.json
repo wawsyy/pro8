@@ -61,5 +61,3 @@
     "vitest": "^3.2.4"
   }
 }
-
-// Configure React dependencies and FHEVM libraries

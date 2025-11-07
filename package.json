@@ -99,7 +99,3 @@
     "minimatch": "^3.1.2"
   }
 }
-
-// Add FHEVM and Hardhat dependencies
-
-// Upgrade dependencies for security and features
