@@ -1,0 +1,8 @@
+<svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="60" cy="60" r="55" fill="#4A90E2" stroke="#2C5282" stroke-width="3"/>
+  <path d="M60 25 L60 55 L50 65 L50 75 L70 75 L70 65 L60 55 Z" fill="#FFFFFF" stroke="#2C5282" stroke-width="2"/>
+  <circle cx="60" cy="85" r="8" fill="#FF6B6B" stroke="#C92A2A" stroke-width="2"/>
+  <path d="M45 35 Q45 25 55 25 Q65 25 65 35" stroke="#FFD700" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <text x="60" y="100" font-family="Arial, sans-serif" font-size="10" fill="#FFFFFF" text-anchor="middle" font-weight="bold">°C</text>
+</svg>
+
