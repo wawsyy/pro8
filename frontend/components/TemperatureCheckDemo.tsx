@@ -15,7 +15,6 @@ export const TemperatureCheckDemo = () => {
     chainId,
     accounts,
     isConnected,
-    connect,
     ethersSigner,
     ethersReadonlyProvider,
     sameChain,
