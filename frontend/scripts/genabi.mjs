@@ -75,6 +75,24 @@ function readABIFromArtifacts(contractName) {
 
 function readDeployment(chainName, chainId, contractName, optional) {
   const chainDeploymentDir = path.join(deploymentsDir, chainName);
+  const isCI = process.env.VERCEL || process.env.CI || process.env.GITHUB_ACTIONS;
+
+  // In CI/CD environments, prioritize reading from artifacts
+  if (isCI && !fs.existsSync(chainDeploymentDir)) {
+    const abi = readABIFromArtifacts(contractName);
+    if (abi) {
+      console.log(`Using ABI from artifacts for ${contractName} (${chainName})`);
+      return { abi, address: "0x0000000000000000000000000000000000000000", chainId };
+    }
+    // If artifacts don't exist, suggest compiling first
+    if (!optional) {
+      console.error(
+        `${line}Unable to locate '${chainDeploymentDir}' directory and artifacts not found.\n\nIn CI/CD environments, please ensure contracts are compiled first:\n1. Goto '${dirname}' directory\n2. Run 'npm install && npm run compile'\n3. Then run 'npm run genabi' from frontend directory${line}`
+      );
+      process.exit(1);
+    }
+    return undefined;
+  }
 
   if (!fs.existsSync(chainDeploymentDir) && chainId === 31337) {
     // Try to auto-deploy the contract on hardhat node!
@@ -90,13 +108,11 @@ function readDeployment(chainName, chainId, contractName, optional) {
   }
 
   if (!fs.existsSync(chainDeploymentDir)) {
-    // If in CI/CD environment, try to read from artifacts as fallback
-    if (process.env.VERCEL || process.env.CI || process.env.GITHUB_ACTIONS) {
-      const abi = readABIFromArtifacts(contractName);
-      if (abi) {
-        console.log(`Using ABI from artifacts for ${contractName} (${chainName})`);
-        return { abi, address: "0x0000000000000000000000000000000000000000", chainId };
-      }
+    // Try to read from artifacts as fallback
+    const abi = readABIFromArtifacts(contractName);
+    if (abi) {
+      console.log(`Using ABI from artifacts for ${contractName} (${chainName})`);
+      return { abi, address: "0x0000000000000000000000000000000000000000", chainId };
     }
     
     console.error(
