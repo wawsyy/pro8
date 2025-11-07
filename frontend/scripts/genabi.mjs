@@ -41,19 +41,36 @@ const deploymentsDir = path.join(dir, "deployments");
 // }
 
 function deployOnHardhatNode() {
+  // Skip auto-deployment in CI/CD environments (Vercel, GitHub Actions, etc.)
+  if (process.env.VERCEL || process.env.CI || process.env.GITHUB_ACTIONS) {
+    console.log("Skipping auto-deployment in CI/CD environment");
+    return false;
+  }
+  
   if (process.platform === "win32") {
     // Not supported on Windows
-    return;
+    return false;
   }
   try {
     execSync(`./deploy-hardhat-node.sh`, {
       cwd: path.resolve("./scripts"),
       stdio: "inherit",
     });
+    return true;
   } catch (e) {
     console.error(`${line}Script execution failed: ${e}${line}`);
-    process.exit(1);
+    return false;
   }
+}
+
+function readABIFromArtifacts(contractName) {
+  const artifactsPath = path.join(dir, "artifacts", "contracts", `${contractName}.sol`, `${contractName}.json`);
+  if (fs.existsSync(artifactsPath)) {
+    const jsonString = fs.readFileSync(artifactsPath, "utf-8");
+    const obj = JSON.parse(jsonString);
+    return obj.abi;
+  }
+  return null;
 }
 
 function readDeployment(chainName, chainId, contractName, optional) {
@@ -61,10 +78,27 @@ function readDeployment(chainName, chainId, contractName, optional) {
 
   if (!fs.existsSync(chainDeploymentDir) && chainId === 31337) {
     // Try to auto-deploy the contract on hardhat node!
-    deployOnHardhatNode();
+    const deployed = deployOnHardhatNode();
+    if (!deployed) {
+      // If deployment failed or skipped, try to read from artifacts
+      const abi = readABIFromArtifacts(contractName);
+      if (abi) {
+        console.log(`Using ABI from artifacts for ${contractName}`);
+        return { abi, address: "0x0000000000000000000000000000000000000000", chainId };
+      }
+    }
   }
 
   if (!fs.existsSync(chainDeploymentDir)) {
+    // If in CI/CD environment, try to read from artifacts as fallback
+    if (process.env.VERCEL || process.env.CI || process.env.GITHUB_ACTIONS) {
+      const abi = readABIFromArtifacts(contractName);
+      if (abi) {
+        console.log(`Using ABI from artifacts for ${contractName} (${chainName})`);
+        return { abi, address: "0x0000000000000000000000000000000000000000", chainId };
+      }
+    }
+    
     console.error(
       `${line}Unable to locate '${chainDeploymentDir}' directory.\n\n1. Goto '${dirname}' directory\n2. Run 'npx hardhat deploy --network ${chainName}'.${line}`
     );
