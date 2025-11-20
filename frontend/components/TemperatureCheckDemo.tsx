@@ -14,7 +14,6 @@ export const TemperatureCheckDemo = () => {
   const {
     provider,
     chainId,
-    accounts,
     isConnected,
     ethersSigner,
     ethersReadonlyProvider,
@@ -31,8 +30,6 @@ export const TemperatureCheckDemo = () => {
 
   const {
     instance: fhevmInstance,
-    status: fhevmStatus,
-    error: fhevmError,
   } = useFhevm({
     provider,
     chainId,
