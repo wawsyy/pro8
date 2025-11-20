@@ -135,42 +135,6 @@ export const TemperatureCheckDemo = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-        {/* Chain Information */}
-        <div className="panel-card">
-          <p className={titleClass}>Chain Information</p>
-          {printProperty("ChainId", chainId)}
-          {printProperty(
-            "Wallet Address",
-            accounts?.[0] || "Not connected"
-          )}
-          <p className={titleClass}>Contract</p>
-          {printProperty("Address", temperatureCheck.contractAddress)}
-          {printProperty("Deployed", temperatureCheck.isDeployed)}
-        </div>
-
-        {/* FHEVM Instance */}
-        <div className="panel-card">
-          <p className={titleClass}>FHEVM Instance</p>
-          {printProperty(
-            "Instance",
-            fhevmInstance ? "OK" : "undefined"
-          )}
-          {printProperty("Status", fhevmStatus)}
-          {printProperty("Error", fhevmError ?? "No Error")}
-        </div>
-
-        {/* Status */}
-        <div className="panel-card">
-          <p className={titleClass}>Status</p>
-          {printProperty("Refreshing", temperatureCheck.isRefreshing)}
-          {printProperty("Decrypting", temperatureCheck.isDecrypting)}
-          {printProperty("Submitting", temperatureCheck.isSubmitting)}
-          {printProperty("Can Get", temperatureCheck.canGetTemperature)}
-          {printProperty("Can Decrypt", temperatureCheck.canDecrypt)}
-          {printProperty("Can Submit", temperatureCheck.canSubmit)}
-        </div>
-      </div>
 
       {/* Encrypted Data */}
       <div className="panel-card mb-6">
