@@ -186,6 +186,23 @@ export const TemperatureCheckDemo = () => {
               className={buttonClass}
               disabled={!temperatureCheck.canSubmit}
               onClick={handleSubmit}
+              title={
+                !temperatureCheck.canSubmit
+                  ? `Cannot submit: ${
+                      !temperatureCheck.address
+                        ? "Contract not deployed"
+                        : !fhevmInstance
+                          ? "FHEVM instance not ready (Relayer SDK may be unavailable)"
+                          : !ethersSigner
+                            ? "Wallet not connected"
+                            : temperatureCheck.isRefreshing
+                              ? "Refreshing data"
+                              : temperatureCheck.isSubmitting
+                                ? "Submitting..."
+                                : "Unknown reason"
+                    }`
+                  : "Submit temperature for encrypted check"
+              }
             >
               {temperatureCheck.canSubmit
                 ? "Submit & Check"
