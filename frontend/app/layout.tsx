@@ -18,12 +18,14 @@ export default async function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={`zama-bg text-foreground antialiased`}>
-        <div className="fixed inset-0 w-full h-full zama-bg z-[-20] min-w-[850px]"></div>
-        <main className="flex flex-col max-w-screen-lg mx-auto pb-20 min-w-[850px]">
+      <body className={`bg-gradient-to-br from-gray-50 via-white to-indigo-50 text-foreground antialiased min-h-screen`}>
+        <div className="fixed inset-0 w-full h-full bg-gradient-to-br from-gray-50 via-white to-indigo-50 z-[-20]"></div>
+        <main className="flex flex-col w-full min-h-screen">
           <Providers>
             <Header />
-            {children}
+            <div className="flex-1">
+              {children}
+            </div>
           </Providers>
         </main>
       </body>
