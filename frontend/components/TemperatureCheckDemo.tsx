@@ -189,7 +189,7 @@ export const TemperatureCheckDemo = () => {
               title={
                 !temperatureCheck.canSubmit
                   ? `Cannot submit: ${
-                      !temperatureCheck.address
+                      !temperatureCheck.contractAddress
                         ? "Contract not deployed"
                         : !fhevmInstance
                           ? "FHEVM instance not ready (Relayer SDK may be unavailable)"
