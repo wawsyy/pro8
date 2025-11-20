@@ -2,21 +2,21 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   headers() {
-    // FHEVM Relayer SDK requires COEP header for SharedArrayBuffer support
-    // Base Account SDK requires COOP to NOT be 'same-origin'
-    // Using 'same-origin-allow-popups' for COOP to balance both requirements
-    // Using 'credentialless' for COEP to allow third-party resources while enabling threads
+    // FHEVM Relayer SDK requires strict COOP and COEP headers for SharedArrayBuffer support
+    // COOP: 'same-origin' is required for FHEVM threads to work
+    // COEP: 'require-corp' is required for proper cross-origin isolation
+    // Note: This may conflict with Base Account SDK, but FHEVM is the core functionality
     return Promise.resolve([
       {
         source: '/:path*',
         headers: [
           {
             key: 'Cross-Origin-Opener-Policy',
-            value: 'same-origin-allow-popups',
+            value: 'same-origin',
           },
           {
             key: 'Cross-Origin-Embedder-Policy',
-            value: 'credentialless',
+            value: 'require-corp',
           },
         ],
       },
